@@ -17,20 +17,18 @@ case $NOTIFTYPE in
 
   monit | Monit | MONIT)
     # $0 NETWORK NODEIP NODESTATE MESSAGE 
-    MESSAGE="<b>Monitor</b>
+    MESSAGE="<b>Monitor @ [${VAR3}]</b>
     <b>Network</b> : ${VAR2}
-    <b>Node</b> : ${VAR3}
     <b>State</b> : ${VAR4}
     <b>Message</b> : ${VAR5}" 
     ;;
 
   jenkins | Jenkins | JENKINS)
     # $0 NETWORK PROJECT BRANCH BUILDNUM 
-    MESSAGE="<b>Jenkins</b>
+    MESSAGE="<b>Jenkins Build #${VAR5} @ [${VAR3}]</b>
     <b>Network</b> : ${VAR2}
-    <b>Project</b> : ${VAR3}
     <b>Branch</b> : ${VAR4}
-    <b>Build </b> : ${VAR5}" 
+    (<a href='https://jenkins.axia.zeeve.net/job/${VAR3}/${VAR5}/console'>Link to Log</a>)"
     ;;
 
   *)
