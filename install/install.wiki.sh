@@ -3,8 +3,8 @@
 # Description : Script to configure AXIA apps on fresh machine
 
 SPACE="/home/AXIA"
-APPNAME="apps"
-GITURL="https://github.com/AXIA-JS/apps.git"
+APPNAME="wiki"
+GITURL="https://github.com/Axia-Tech/AXIA-wiki.git"
 
 BRANCH="$1" ; [[ -z ${BRANCH} ]] && BRANCH="master"
 CLEANUP="$2" ; [[ -z ${CLEANUP} ]] && CLEANUP="false"
@@ -47,13 +47,6 @@ patching(){
 	# Well You know Dev Team is working on many things. Therefore, Code stability is ideal & According to them. We need to automate the manual patching work as well.
 	cd ${SPACE}/${APPNAME}
 
-	# Patch by Sankar Boro #
-	sed -i 's|"./AXIA"|"./AXIA.js"|g' node_modules/@axia-js/react-identicon/icons/index.js node_modules/@axia-js/react-identicon/icons/index.cjs
-	LINENUM=$(grep -Rin "result\[name\] = knownOrigins\[name\] || 'Null';" node_modules/@polkadot/types/metadata/v13/toLatest.js|cut -d ':' -f1)
-	[[ ! -z ${LINENUM} ]] && {
-	sed -i -e "${LINENUM}s/^/\/\/ /" node_modules/@polkadot/types/metadata/v13/toLatest.js
-	sed -i "${LINENUM} i result[name] = 'Null';" node_modules/@polkadot/types/metadata/v13/toLatest.js
-	}
 	# End of Patching #
 }
 
