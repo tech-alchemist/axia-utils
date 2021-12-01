@@ -22,7 +22,7 @@ case $NOTIFTYPE in
 
   jenkins | Jenkins | JENKINS)
     # $0 NETWORK PROJECT BRANCH BUILDNUM 
-    MESSAGE="<b>Jenkins Build</b> <b>Network</b> : ${VAR2} <b>Project</b> : ${VAR3}  <b>Branch</b> : ${VAR4} <b>Build </b> : ${VAR5}" 
+    MESSAGE="<b>Jenkins Build</b><br><b>Network</b> : ${VAR2}<br><b>Project</b> : ${VAR3}<br><b>Branch</b> : ${VAR4}<br><b>Build </b> : ${VAR5}" 
     ;;
 
   *)
