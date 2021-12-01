@@ -1,0 +1,4 @@
+## Telegram Config @ /opt/opsdude/axia-utils/extras/tg.conf #
+
+TOKEN="UNIQUE BOT TOKEN HERE"
+CHATID="CHAT ID HERE"
