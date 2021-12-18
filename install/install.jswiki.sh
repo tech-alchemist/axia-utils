@@ -1,6 +1,6 @@
 #!/bin/bash
-# Author : Abhishek Rana
-# Description : Script to configure AXIA apps on fresh machine
+# Author : Tech-Alchemist (Abhishek Rana)
+# Description : Script to configure AXIA JS Wiki on fresh machine
 
 SPACE="/home/AXIA"
 APPNAME="jswiki"
@@ -59,6 +59,7 @@ start_app(){
 	PROCNAME="$(pwd|rev| cut -d '/' -f1-2|rev| sed 's/\//-/g')"
 	SID="$("${PM2}" id "${PROCNAME}"| sed -e 's| ||g' -e 's|\[||g' -e 's|\]||g')"
 	[[ -z "${SID}" ]] && "${PM2}" start yarn --name ${PROCNAME} -- start  || "${PM2}" restart "${SID}"
+	sleep 1
 	"${PM2}" save
 }
 

@@ -1,5 +1,5 @@
 #!/bin/bash
-# Author : Abhishek Rana
+# Author : Tech-Alchemist (Abhishek Rana)
 # Description : Script to configure AXIA apps on fresh machine
 
 SPACE="/home/AXIA"

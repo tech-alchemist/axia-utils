@@ -1,6 +1,6 @@
 #!/bin/bash
 # Author : Abhishek Rana
-# Description : Script to configure AXIA apps on fresh machine
+# Description : Script to configure AXIA Common Wiki on fresh machine
 
 SPACE="/home/AXIA"
 APPNAME="wiki"
