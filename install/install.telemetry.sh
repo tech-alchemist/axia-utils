@@ -70,12 +70,12 @@ APPNAME="substrate-telemetry"
 mkdir -p ${LOGDIR}
 for i in $(lsof -i:8000 | awk '{print $2}'| sed '/^PID/d'| uniq); do kill -9 $i; done ; sleep 1
 for i in $(lsof -i:8001 | awk '{print $2}'| sed '/^PID/d'| uniq); do kill -9 $i; done ; sleep 1
-cd "${SPACE}/${APPNAME}/backend"
-./target/release/telemetry_core  -l 0.0.0.0:8000 &> "${LOGDIR}/telemetry.core.log"
+cd ${SPACE}/${APPNAME}/backend
+./target/release/telemetry_core  -l 0.0.0.0:8000 &> ${LOGDIR}/telemetry.core.log &
 sleep 2
-./target/release/telemetry_shard -l 0.0.0.0:8001 &> "${LOGDIR}/telemetry.shard.log"
+./target/release/telemetry_shard -l 0.0.0.0:8001 &> ${LOGDIR}/telemetry.shard.log &
 sleep 2
-cd "${SPACE}/${APPNAME}/frontend"
+cd ${SPACE}/${APPNAME}/frontend
 echo "[+] Starting App ${APPNAME}"
 ${PM2} status ; sleep 3
 PROCNAME="$(pwd|rev| cut -d '/' -f1-2|rev| sed 's/\//-/g')"
