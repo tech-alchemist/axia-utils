@@ -66,6 +66,8 @@ cd ${SPACE}/${APPNAME}
 APPNAME="substrate-telemetry"
 mkdir -p ${LOGDIR}
 cd "${SPACE}/${APPNAME}/backend"
+for i in $(lsof -i:8000 | awk '{print $2}'| sed '/^PID/d'| uniq); do kill -9 $i; done
+for i in $(lsof -i:8001 | awk '{print $2}'| sed '/^PID/d'| uniq); do kill -9 $i; done
 ./target/release/telemetry_core  -l 0.0.0.0:8000 &> "${LOGDIR}/telemetry.core.log"  &
 ./target/release/telemetry_shard -l 0.0.0.0:8001 &> "${LOGDIR}/telemetry.shard.log" &
 cd "${SPACE}/${APPNAME}/frontend"
