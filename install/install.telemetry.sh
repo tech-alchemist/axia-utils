@@ -49,6 +49,10 @@ cd "${SPACE}/${APPNAME}/frontend"
 yarn install || exit 1
 sleep 1
 
+## patching
+cd "${SPACE}/${APPNAME}/frontend"
+sed -i -e '62,65d' node_modules/camelcase/index.js && sed -i 's|options = {|options = {};|g' node_modules/camelcase/index.js
+
 ## setup_telemetry_exporter ##
 APPNAME="substrate-telemetry-exporter"
 GITURL="https://github.com/Axia-Tech/substrate-telemetry-exporter"
@@ -58,9 +62,6 @@ cd ${SPACE}/${APPNAME} ; git init ; git remote add origin ${GITURL} ; git remote
 git checkout ${BRANCH} ; git pull origin ${BRANCH}
 yarn install || exit 1
 sleep 1
-
-## patching
-cd ${SPACE}/${APPNAME}
 
 ## start_telemetry
 APPNAME="substrate-telemetry"
