@@ -67,9 +67,9 @@ sleep 1
 ## start_telemetry
 APPNAME="substrate-telemetry"
 mkdir -p ${LOGDIR}
+for i in $(lsof -i:8000 | awk '{print $2}'| sed '/^PID/d'| uniq); do kill -9 $i; done ; sleep 1
+for i in $(lsof -i:8001 | awk '{print $2}'| sed '/^PID/d'| uniq); do kill -9 $i; done ; sleep 1
 cd "${SPACE}/${APPNAME}/backend"
-for i in $(lsof -i:8000 | awk '{print $2}'| sed '/^PID/d'| uniq); do kill -9 $i; done
-for i in $(lsof -i:8001 | awk '{print $2}'| sed '/^PID/d'| uniq); do kill -9 $i; done
 ./target/release/telemetry_core  -l 0.0.0.0:8000 &> "${LOGDIR}/telemetry.core.log"  &
 sleep 2
 ./target/release/telemetry_shard -l 0.0.0.0:8001 &> "${LOGDIR}/telemetry.shard.log" &
