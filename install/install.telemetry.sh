@@ -51,8 +51,8 @@ sleep 1
 ## Frontend Patching ## Module to be Fixed by DevTeam ##
 ## Patch 1
 cd "${SPACE}/${APPNAME}/frontend"
-ERR1="$(grep -Rin '...options' node_modules/camelcase/index.js)"
-[[ ! -z ${ERR1} ]] && sed -i -e '62,65d' node_modules/camelcase/index.js && sed -i 's|options = {|options = {};|g' node_modules/camelcase/index.js
+ERR1="$(grep -Rin '\...options' node_modules/camelcase/index.js)"
+[[ ! -z "${ERR1}" ]] && sed -i -e '62,65d' node_modules/camelcase/index.js && sed -i 's|options = {|options = {};|g' node_modules/camelcase/index.js
 ## End Patch 1
 
 ## setup_telemetry_exporter ##
@@ -65,11 +65,12 @@ git checkout ${BRANCH} ; git pull origin ${BRANCH}
 yarn install || exit 1
 sleep 1
 
-## start_telemetry
+## start_telemetry backend
 APPNAME="substrate-telemetry"
 mkdir -p ${LOGDIR}
-for i in $(lsof -i:8000 | awk '{print $2}'| sed '/^PID/d'| uniq); do kill -9 $i; done ; sleep 1
-for i in $(lsof -i:8001 | awk '{print $2}'| sed '/^PID/d'| uniq); do kill -9 $i; done ; sleep 1
+for i in $(lsof -i:8000 | awk '{print $2}'| sed '/^PID/d'| uniq); do kill -9 $i; done 
+for i in $(lsof -i:8001 | awk '{print $2}'| sed '/^PID/d'| uniq); do kill -9 $i; done
+sleep 2
 cd ${SPACE}/${APPNAME}/backend
 ./target/release/telemetry_core  -l 0.0.0.0:8000 &> ${LOGDIR}/telemetry.core.log &
 sleep 2
