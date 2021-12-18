@@ -49,9 +49,11 @@ cd "${SPACE}/${APPNAME}/frontend"
 yarn install || exit 1
 sleep 1
 
-## patching
+## Frontend Patching ## TODO : fix by Boro
 cd "${SPACE}/${APPNAME}/frontend"
 sed -i -e '62,65d' node_modules/camelcase/index.js && sed -i 's|options = {|options = {};|g' node_modules/camelcase/index.js
+## End oF Patching
+
 
 ## setup_telemetry_exporter ##
 APPNAME="substrate-telemetry-exporter"
