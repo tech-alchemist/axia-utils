@@ -44,8 +44,10 @@ cd ${SPACE}/${APPNAME} ; git init ; git remote add origin ${GITURL} ; git remote
 git checkout ${BRANCH} ; git pull origin ${BRANCH}
 cd "${SPACE}/${APPNAME}/backend"
 cargo build --release || exit 1
+echo "[+] Backend Compiled"
 cd "${SPACE}/${APPNAME}/frontend"
 yarn install || exit 1
+echo "[+] Frontend Compiled"
 sleep 1
 
 ## Frontend Patching ## Module to be Fixed by DevTeam ##
@@ -63,6 +65,7 @@ echo "[+] Bringing code from ${GITURL}"
 cd ${SPACE}/${APPNAME} ; git init ; git remote add origin ${GITURL} ; git remote update ; git reset --hard
 git checkout ${BRANCH} ; git pull origin ${BRANCH}
 yarn install || exit 1
+echo "[+] Exporter Compiled"
 sleep 1
 
 ## Starting Telemetry Stack
