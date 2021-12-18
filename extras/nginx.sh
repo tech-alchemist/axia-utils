@@ -13,13 +13,13 @@ UTILS_DIR="/opt/opsdude/axia-utils/extras"
 case $PROTO in
 
   wss | Wss | WSS)
-    sed -e "s/DOMAIN_NAME/${DOMAIN_NAME}/g" -e "s|PRIVATE_IP|${PRIVATE_IP}|g" -e "s|PRIVATE_PORT|${PRIVATE_PORT}|g" ${UTILS_DIR}/WSS.conf.example | sudo tee /etc/nginx/sites-enabled/${DOMAINNAME}.conf
+    sed -e "s/DOMAIN_NAME/${DOMAIN_NAME}/g" -e "s|PRIVATE_IP|${PRIVATE_IP}|g" -e "s|PRIVATE_PORT|${PRIVATE_PORT}|g" ${UTILS_DIR}/WSS.conf.example | sudo tee /etc/nginx/sites-enabled/${DOMAIN_NAME}.conf
     sudo service nginx restart
     ;;
 
 
   HTTPS | Https | https)
-    sed -e "s/DOMAIN_NAME/${DOMAIN_NAME}/g" -e "s|PRIVATE_IP|${PRIVATE_IP}|g" -e "s|PRIVATE_PORT|${PRIVATE_PORT}|g" ${UTILS_DIR}/HTTPS.conf.example | sudo tee /etc/nginx/sites-enabled/${DOMAINNAME}.conf
+    sed -e "s/DOMAIN_NAME/${DOMAIN_NAME}/g" -e "s|PRIVATE_IP|${PRIVATE_IP}|g" -e "s|PRIVATE_PORT|${PRIVATE_PORT}|g" ${UTILS_DIR}/HTTPS.conf.example | sudo tee /etc/nginx/sites-enabled/${DOMAIN_NAME}.conf
     sudo service nginx restart
     ;;
 
