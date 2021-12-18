@@ -1,6 +1,6 @@
 #!/bin/bash
 # Author : Tech-Alchemist (Abhishek Rana)
-# Description : Script to configure AXIA Telemetry on fresh Machine
+# Description : Script to Install AXIA Telemetry on fresh Machine
 
 SPACE="/home/AXIA"
 LOGDIR="${SPACE}/Data/Logs"

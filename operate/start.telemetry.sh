@@ -1,6 +1,6 @@
 #!/bin/bash
 ## Author : Abhishek Rana ##
-## Description : Script to Start Full Node ##
+## Description : Script to Start Telemetry Stack ##
 
 SPACE="/home/AXIA"
 LOGDIR="${SPACE}/Data/Logs"
@@ -15,10 +15,9 @@ for i in $(lsof -i:8001 | awk '{print $2}'| sed '/^PID/d'| uniq); do kill -9 $i;
 sleep 2
 echo "[+] Starting Backend"
 cd ${SPACE}/${APPNAME}/backend
-./target/release/telemetry_core  -l 0.0.0.0:8000 &> ${LOGDIR}/telemetry.core.log &
-sleep 2
-./target/release/telemetry_shard -l 0.0.0.0:8001 &> ${LOGDIR}/telemetry.shard.log &
-sleep 2
+bash -c "/home/AXIA/substrate-telemetry/backend/target/release/telemetry_core  -l 0.0.0.0:8000 &> /home/AXIA/Data/Logs/telemetry.core.log  &" && sleep 2
+bash -c "/home/AXIA/substrate-telemetry/backend/target/release/telemetry_shard -l 0.0.0.0:8001 &> /home/AXIA/Data/Logs/telemetry.shard.log &" && sleep 2
+
 cd ${SPACE}/${APPNAME}/frontend
 echo "[+] Starting Frontend ${APPNAME}"
 ${PM2} status ; sleep 3
