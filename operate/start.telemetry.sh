@@ -5,7 +5,9 @@
 SPACE="/home/AXIA"
 LOGDIR="${SPACE}/Data/Logs"
 mkdir -p ${LOGDIR} &> /dev/null
+PM2="/usr/local/bin/pm2"
 
+## start substrate_telemetry
 APPNAME="substrate-telemetry"
 echo "[+] Killing Old Backend Processes"
 for i in $(lsof -i:8000 | awk '{print $2}'| sed '/^PID/d'| uniq); do kill -9 $i; done 
@@ -25,7 +27,7 @@ SID="$("${PM2}" id "${PROCNAME}"| sed -e 's| ||g' -e 's|\[||g' -e 's|\]||g')"
 [[ -z "${SID}" ]] && "${PM2}" start yarn --name ${PROCNAME} -- start  || "${PM2}" restart "${SID}"
 sleep 2
 
-## start_telemetry_exporter
+##  start substrate_telemetry_exporter
 APPNAME="substrate-telemetry-exporter"
 echo "[+] Starting Exporter ${APPNAME}"
 ${PM2} status ; sleep 3

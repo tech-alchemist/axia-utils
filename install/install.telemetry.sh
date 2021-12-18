@@ -6,7 +6,6 @@ SPACE="/home/AXIA"
 LOGDIR="${SPACE}/Data/Logs"
 BRANCH="$1" ; [[ -z ${BRANCH} ]] && BRANCH="master"
 CLEANUP="$2" ; [[ -z ${CLEANUP} ]] && CLEANUP="false"
-PM2="/usr/local/bin/pm2"
 
 ## Install required packages ##
 echo "[+] Well, It's a fresh Node, Setting up from scratch."
