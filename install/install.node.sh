@@ -9,7 +9,7 @@ RELEASE_URL="https://releases.axiacoin.network/TestNet/axia"
 
 install_rust(){
 sudo apt-get update
-sudo apt-get install -y git clang curl libssl-dev llvm libudev-dev expect net-tools wget
+sudo apt-get install -y git clang curl libssl-dev llvm libudev-dev expect net-tools wget librust-openssl-dev python3-dev python3 python3-pip
 curl -sSLk https://sh.rustup.rs -o /tmp/rustup.sh
 echo '#!/usr/bin/expect -f
 set timeout -1

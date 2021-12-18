@@ -10,7 +10,7 @@ PM2="/usr/local/bin/pm2"
 
 ## Install required packages ##
 echo "[+] Well, It's a fresh Node, Setting up from scratch."
-sudo apt install npm jq net-tools git curl libssl-dev libffi-dev clang llvm libudev-dev expect wget -y
+sudo apt -y install npm jq net-tools git curl libssl-dev libffi-dev clang llvm libudev-dev expect wget librust-openssl-dev python3-dev python3 python3-pip
 echo "[+] Setting Up Rust"
 curl -sSLk https://sh.rustup.rs -o /tmp/rustup.sh
 echo '#!/usr/bin/expect -f
