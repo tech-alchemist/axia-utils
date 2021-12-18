@@ -32,8 +32,7 @@ echo "[+] Installed pm2 & yarn (latest)"
 ## CleanUp ##
 [[ ${CLEANUP} == "true" ]] && {
 	echo "[+] Removing ${SPACE} as Cleanup was selected"
-	cd ${SPACE}
-	rm -rf *
+	rm -rf ${SPACE}/*
 }
 
 ## setup_telemetry ##
