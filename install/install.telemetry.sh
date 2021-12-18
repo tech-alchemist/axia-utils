@@ -48,11 +48,12 @@ cd "${SPACE}/${APPNAME}/frontend"
 yarn install || exit 1
 sleep 1
 
-## Frontend Patching ## TODO : fix by Boro
+## Frontend Patching ## Module to be Fixed by DevTeam ##
+## Patch 1
 cd "${SPACE}/${APPNAME}/frontend"
-sed -i -e '62,65d' node_modules/camelcase/index.js && sed -i 's|options = {|options = {};|g' node_modules/camelcase/index.js
-## End oF Patching
-
+ERR1="$(grep -Rin '...options' node_modules/camelcase/index.js)"
+[[ ! -z ${ERR1} ]] && sed -i -e '62,65d' node_modules/camelcase/index.js && sed -i 's|options = {|options = {};|g' node_modules/camelcase/index.js
+## End Patch 1
 
 ## setup_telemetry_exporter ##
 APPNAME="substrate-telemetry-exporter"
