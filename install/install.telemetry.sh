@@ -80,9 +80,10 @@ for i in $(lsof -i:8001 | awk '{print $2}'| sed '/^PID/d'| uniq); do kill -9 $i;
 sleep 2
 echo "[+] Starting Backend"
 cd ${SPACE}/${APPNAME}/backend
-bash -c "/home/AXIA/substrate-telemetry/backend/target/release/telemetry_core  -l 0.0.0.0:8000 &> /home/AXIA/Data/Logs/telemetry.core.log  &" && sleep 2
-bash -c "/home/AXIA/substrate-telemetry/backend/target/release/telemetry_shard -l 0.0.0.0:8001 &> /home/AXIA/Data/Logs/telemetry.shard.log &" && sleep 2
-
+bash -c "/home/AXIA/substrate-telemetry/backend/target/release/telemetry_core  -l 0.0.0.0:8000 &> /home/AXIA/Data/Logs/telemetry.core.log  &" &> /dev/null
+sleep 2
+bash -c "/home/AXIA/substrate-telemetry/backend/target/release/telemetry_shard -l 0.0.0.0:8001 &> /home/AXIA/Data/Logs/telemetry.shard.log &" &> /dev/null
+sleep 2
 cd ${SPACE}/${APPNAME}/frontend
 echo "[+] Starting Frontend ${APPNAME}"
 ${PM2} status ; sleep 3
@@ -101,7 +102,5 @@ SID="$("${PM2}" id "${PROCNAME}"| sed -e 's| ||g' -e 's|\[||g' -e 's|\]||g')"
 [[ -z "${SID}" ]] && "${PM2}" start yarn --name ${PROCNAME} -- start  || "${PM2}" restart "${SID}"
 sleep 2
 "${PM2}" save
-
-## E O F ##
 
 ## E O F ##
