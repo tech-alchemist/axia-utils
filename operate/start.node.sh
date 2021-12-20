@@ -43,7 +43,7 @@ case $NETWORK in
     ;;
 
   CanaryNet | CANARYNET | canarynet)
-    get_raw_file "https://releases.axiacoin.network/TestNet/testnet.raw.json"
+    get_raw_file "https://releases.axiacoin.network/CanaryNet/canarynet.raw.json"
     start_network canarynet
     ;;
 
