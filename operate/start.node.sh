@@ -24,6 +24,7 @@ start_network(){
     NETNAME="$1"
     for i in $(ps aux | grep ${BINARY}| grep "NodeData" | awk '{print $2}'); do kill -9 $i; done && sleep 3
     mkdir -p ${DATADIR}
+    [[ -f "${SPACE}/Data/${NETNAME}.raw.json" ]] && CHAINNAME="${SPACE}/Data/${NETNAME}.raw.json" || CHAINNAME="alphanet"
     ${BINARY} -d ${DATADIR} --ws-port ${WSS} --rpc-port ${RPC} --port ${P2P} --chain ${SPACE}/Data/${NETNAME}.raw.json --rpc-cors all --unsafe-rpc-external --unsafe-ws-external --name "${NODENAME}" &> "${LOGFILE}" &
     echo "[+] Node started with :"
     echo "    Ports    : P2P = ${P2P} , WSS = ${WSS} , RPC = ${RPC}"
@@ -37,17 +38,17 @@ start_network(){
 case $NETWORK in
 
   MainNet | MAINNET | mainnet)
-    get_raw_file "https://raw.githubusercontent.com/Axia-Tech/axia/master/node/service/res/alphanet.json"
+    get_raw_file "https://releases.axiacoin.network/TestNet/testnet.raw.json"
     start_network mainnet
     ;;
 
   CanaryNet | CANARYNET | canarynet)
-    get_raw_file "https://raw.githubusercontent.com/Axia-Tech/axia/master/node/service/res/alphanet.json"
+    get_raw_file "https://releases.axiacoin.network/TestNet/testnet.raw.json"
     start_network canarynet
     ;;
 
   TestNet | TESTNET | testnet)
-    get_raw_file "https://raw.githubusercontent.com/Axia-Tech/axia/master/node/service/res/alphanet.json"
+    get_raw_file "https://releases.axiacoin.network/TestNet/testnet.raw.json"
     start_network testnet
     ;;
 
