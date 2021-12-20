@@ -28,7 +28,7 @@ case $NOTIFTYPE in
     MESSAGE="<b>Jenkins Build #${VAR5} @ [${VAR3}]</b>
     <b>Network</b> : ${VAR2}
     <b>Branch</b> : ${VAR4}
-    (<a href='https://jenkins.axia.zeeve.net/job/${VAR3}/${VAR5}/console'>Link to Log</a>)"
+    (<a href='https://jenkins.axiacoin.network/job/${VAR3}/${VAR5}/console'>Link to Log</a>)"
     ;;
 
   *)
