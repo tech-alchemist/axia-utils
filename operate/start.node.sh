@@ -9,7 +9,7 @@ SPACE="/home/AXIA"
 BINARY="${SPACE}/Bins/axia"
 DATADIR="${SPACE}/Data/NodeData"
 LOGFILE="${SPACE}/Data/daemon.log"
-NETWORK="$1" ; [[ -z ${NETWORK} ]] && { echo "[-] Usage : $0 <testnet|canarynet|mainnet >" ; exit 1 ; }
+NETWORK="$1" ; [[ -z ${NETWORK} ]] && { echo "[-] Usage : $0 < testnet|canarynet|mainnet >" ; exit 1 ; }
 
 NODENAME="${NETWORK} $(ifconfig | grep "^e\|^w" -A 4| grep ether| awk '{print $2}' | sed 's|:| |g' | rev | head -1)"
 
