@@ -5,14 +5,13 @@
 P2P="3101"
 WSS="3102"
 RPC="3103"
-
 SPACE="/home/AXIA"
 BINARY="${SPACE}/Bins/axia"
 DATADIR="${SPACE}/Data/NodeData"
-NODENAME="$(hostname)"
 LOGFILE="${SPACE}/Data/daemon.log"
-
 NETWORK="$1" ; [[ -z ${NETWORK} ]] && { echo "[-] Usage : $0 <testnet|canarynet|mainnet >" ; exit 1 ; }
+
+NODENAME="${NETWORK} $(ifconfig | grep "^e\|^w" -A 4| grep ether| awk '{print $2}' | sed 's|:|-|g' | rev | head -1)"
 
 start_network(){
     NETNAME="$1"
