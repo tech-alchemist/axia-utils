@@ -1,6 +1,6 @@
 #!/bin/bash
 ## Author : Abhishek Rana ##
-## Description : Script to Start Standard AXIA Node ##
+## Description : Script to Start Archive AXIA Node ##
 
 P2P="3101"
 WSS="3102"
@@ -13,7 +13,7 @@ HELPMSG="[-] Usage : $0 < testnet | canarynet | mainnet >"
 NETWORK="$1" ; [[ -z ${NETWORK} ]] && { echo "${HELPMSG}" ; exit 1 ; }
 
 ## Unqiue Node Name for Telemetry ##
-NODENAME="${NETWORK^} Node $(ifconfig | grep "^e\|^w" -A 4| grep ether| awk '{print $2}' | sed 's|:| |g' | rev | head -1)"
+NODENAME="${NETWORK^} Archive $(ifconfig | grep "^e\|^w" -A 4| grep ether| awk '{print $2}' | sed 's|:| |g' | rev | head -1)"
 
 ## Check File Sanity & Bring If file is not correct ##
 file_sanity(){
@@ -26,10 +26,10 @@ file_sanity(){
   [[ "${MENTIONED_HASH}" != "${EXISTING_HASH}" ]] && { 
     rm -f ${FILE_PATH}
     sudo mkdir -p ${SPACE}/Bins ${DATADIR} ; sudo chown -R $(whoami).$(whoami) ${SPACE}
-    echo "[-] File [${FILE_NAME}] has invalid hash [${EXISTING_HASH}] , Downloading.."
+    echo "[-]  File = [${FILE_NAME}] is InValid. Downloading..."
     wget -c "${FILE_URL}" -q --show-progress -O ${FILE_PATH} || { echo "[-] Unable to download ${FILE_PATH} from ${FILE_URL}" ; exit 1 ; }
     chmod +x ${FILE_PATH}
-  } || echo "[+] File [${FILE_NAME}] has valid hash [${EXISTING_HASH}] , Skipping downlaod.."
+  } || echo "[+] File = [${FILE_NAME}] is valid."
 }
 
 ## Start Network Accordingly
