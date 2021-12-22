@@ -1,0 +1,5 @@
+## File CheckSums ## Check Integrity of Files ##
+
+bbe84c1119f776c459bb8017b364d45a  axia
+a3e8f5be75872326fb8f88adce96964f  testnet.raw.json
+417bbad407405cde900784449a583641  canarynet.raw.json
