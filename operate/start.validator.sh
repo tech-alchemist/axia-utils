@@ -25,7 +25,7 @@ start_network(){
     for i in $(ps aux | grep ${BINARY}| grep "NodeData" | awk '{print $2}'); do kill -9 $i; done && sleep 3
     mkdir -p ${DATADIR}
     [[ -f "${SPACE}/Data/${NETNAME}.raw.json" ]] && CHAINNAME="${SPACE}/Data/${NETNAME}.raw.json" || CHAINNAME="alphanet"
-    ${BINARY} -d ${DATADIR} --ws-port ${WSS} --rpc-port ${RPC} --port ${P2P} --chain ${SPACE}/Data/${NETNAME}.raw.json --rpc-cors all --unsafe-rpc-external --unsafe-ws-external --name "${NODENAME}" --validator --no-grandpa &> "${LOGFILE}" &
+    ${BINARY} -d ${DATADIR} --ws-port ${WSS} --rpc-port ${RPC} --port ${P2P} --chain ${SPACE}/Data/${NETNAME}.raw.json --rpc-cors all --unsafe-rpc-external --unsafe-ws-external --name "${NODENAME}" --validator &> "${LOGFILE}" &
     echo "[+] Node started with :"
     echo "    Ports    : P2P = ${P2P} , WSS = ${WSS} , RPC = ${RPC}"
     echo "    Log File : ${LOGFILE}"
