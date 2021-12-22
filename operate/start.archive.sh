@@ -22,7 +22,7 @@ file_sanity(){
   FILE_URL="$3"
   CHECKSUM_FILE="/opt/opsdude/axia-utils/extras/checksum.txt"
   MENTIONED_HASH=$(grep -i " ${FILE_NAME}" ${CHECKSUM_FILE}|sed 's/ */ /g'|awk '{print $1}'| head -1)
-  EXISTING_HASH=$(md5sum ${FILE_PATH} | awk '{print $1}' 2> /dev/null)
+  EXISTING_HASH=$(md5sum ${FILE_PATH} | awk '{print $1}')
   [[ "${MENTIONED_HASH}" != "${EXISTING_HASH}" ]] && { 
     rm -f ${FILE_PATH}
     sudo mkdir -p ${SPACE}/Bins ${DATADIR} ; sudo chown -R $(whoami).$(whoami) ${SPACE}
@@ -51,7 +51,7 @@ case $NETWORK in
 
   MainNet | MAINNET | mainnet)
     file_sanity "${SPACE}/Bins/axia"                    "axia"                    "releases.axiacoin.network/testnet/axia"
-    file_sanity "${SPACE}/Data/${NETWORK,,}.raw.json"   "${NETWORK,,}.raw.json"   "releases.axiacoin.network/${NETWORK,,}/${NETWORK,,}.raw.json"
+    file_sanity "${SPACE}/Data/${NETWORK,,}.raw.json"   "${NETWORK,,}.raw.json"   "releases.axiacoin.network/testnet/testnet.raw.json"
     start_network ${NETWORK,,}
     ;;
 
