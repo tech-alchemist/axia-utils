@@ -7,26 +7,12 @@ LOGDIR="${SPACE}/Data/Logs"
 BRANCH="$1" ; [[ -z ${BRANCH} ]] && BRANCH="master"
 CLEANUP="$2" ; [[ -z ${CLEANUP} ]] && CLEANUP="false"
 
-## Install required packages ##
-echo "[+] Well, It's a fresh Node, Setting up from scratch."
-sudo apt -y install npm jq net-tools git curl libssl-dev libffi-dev clang llvm libudev-dev expect wget librust-openssl-dev python3-dev python3 python3-pip
-echo "[+] Setting Up Rust"
-curl -sSLk https://sh.rustup.rs -o /tmp/rustup.sh
-echo '#!/usr/bin/expect -f
-set timeout -1
-spawn /tmp/rustup.sh
-send -- "1\r"
-expect eof' > /tmp/rustup.exp
-chmod +x /tmp/rustup.*
-/tmp/rustup.exp ; 
-source $HOME/.cargo/env
-rm -f /tmp/rustup.*
-echo "[+] Setting up NodeJS"
-sudo npm i -g n
-sudo n 14.18
-echo "[+] Installed NodeJS $(node -v) & NPM $(npm -v)"
-sudo npm i -g pm2 yarn || exit 1
-echo "[+] Installed pm2 & yarn (latest)"
+## Check Required Packages ##
+which npm  || { bash /opt/opsdude/axia-utils/install/js.deps.sh ; }
+which pm2  || { bash /opt/opsdude/axia-utils/install/js.deps.sh ; }
+which yarn || { bash /opt/opsdude/axia-utils/install/js.deps.sh ; }
+which rustc  || { bash /opt/opsdude/axia-utils/install/rust.deps.sh ; }
+which cargo  || { bash /opt/opsdude/axia-utils/install/rust.deps.sh ; }
 
 ## CleanUp ##
 [[ ${CLEANUP} == "true" ]] && {
@@ -67,7 +53,7 @@ yarn install || exit 1
 echo "[+] Exporter Compiled"
 sleep 1
 
-## Starting Telemetry Stack
+## Starting Telemetry Full Stack
 
 mkdir -p ${LOGDIR} &> /dev/null
 PM2="/usr/local/bin/pm2"

@@ -1,6 +1,7 @@
 #!/bin/bash
-## Author : Abhishek Rana ##
-## Script to send Alerts via Telegram Bot ##
+## Author : Tech-Alchemist (Abhishek Rana)
+## Description : Script to Send Alerts via telegram Bot ##
+## Usage : ./this_script < monit | jenkins >  VAR1 VAR2 VAR3 VAR4 VAR5
 
 NOTIFTYPE="$1"
 

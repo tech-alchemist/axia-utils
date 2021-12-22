@@ -1,6 +1,7 @@
 #!/bin/bash
-## Author : Abhishek Rana ##
-## Description : Script to Start Normal AXIA Node ##
+# Author : Tech-Alchemist (Abhishek Rana)
+## Description : Script to Start AXIA Full Node
+## Usage : ./this_script < testnet | canarynet | mainnet >
 
 P2P="3101"
 WSS="3102"
@@ -11,6 +12,10 @@ DATADIR="${SPACE}/Data/NodeData"
 LOGFILE="${SPACE}/Data/daemon.log"
 HELPMSG="[-] Usage : $0 < testnet | canarynet | mainnet >"
 NETWORK="$1" ; [[ -z ${NETWORK} ]] && { echo "${HELPMSG}" ; exit 1 ; }
+
+## Check Required Packages ##
+which rustc  || { bash /opt/opsdude/axia-utils/install/rust.deps.sh ; }
+which cargo  || { bash /opt/opsdude/axia-utils/install/rust.deps.sh ; }
 
 ## Unqiue Node Name for Telemetry ##
 NODENAME="${NETWORK^} Node $(ifconfig | grep "^e\|^w" -A 4| grep ether| awk '{print $2}' | sed 's|:| |g' | rev | head -1)"

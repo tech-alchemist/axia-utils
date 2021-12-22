@@ -1,25 +1,19 @@
 #!/bin/bash
 # Author : Tech-Alchemist (Abhishek Rana)
-# Description : Script to configure AXIA JS Wiki on fresh machine
+# Description : Script to configure AXIA apps on fresh machine
 
 SPACE="/home/AXIA"
-APPNAME="jswiki"
-GITURL="https://github.com/AxiaSolar-Js/docs.git"
+APPNAME="apps"
+GITURL="https://github.com/AXIA-JS/apps.git"
 
 BRANCH="$1" ; [[ -z ${BRANCH} ]] && BRANCH="master"
 CLEANUP="$2" ; [[ -z ${CLEANUP} ]] && CLEANUP="false"
 
-check_pkgs(){
-	which npm || {
-		echo "[+] Well, It's a fresh Node, Setting up from scratch."
-		sudo apt install npm jq net-tools git curl libssl-dev libffi-dev -y 
-		sudo npm i -g n
-		sudo n 14.18
-		echo "[+] Installed NodeJS $(node -v) & NPM $(npm -v)"
-		sudo npm i -g pm2 yarn || exit 1
-		echo "[+] Installed pm2 & yarn (latest)"
-	}
-}
+## Check Required Packages ##
+which npm  || { bash /opt/opsdude/axia-utils/install/js.deps.sh ; }
+which pm2  || { bash /opt/opsdude/axia-utils/install/js.deps.sh ; }
+which yarn || { bash /opt/opsdude/axia-utils/install/js.deps.sh ; }
+
 
 cleanup(){
 	[[ ${CLEANUP} == "true" ]] && {
@@ -47,6 +41,13 @@ patching(){
 	# Well You know Dev Team is working on many things. Therefore, Code stability is ideal & According to them. We need to automate the manual patching work as well.
 	cd ${SPACE}/${APPNAME}
 
+	# Patch by Sankar Boro #
+	sed -i 's|"./AXIA"|"./AXIA.js"|g' node_modules/@axia-js/react-identicon/icons/index.js node_modules/@axia-js/react-identicon/icons/index.cjs
+	LINENUM=$(grep -Rin "result\[name\] = knownOrigins\[name\] || 'Null';" node_modules/@polkadot/types/metadata/v13/toLatest.js|cut -d ':' -f1)
+	[[ ! -z ${LINENUM} ]] && {
+	sed -i -e "${LINENUM}s/^/\/\/ /" node_modules/@polkadot/types/metadata/v13/toLatest.js
+	sed -i "${LINENUM} i result[name] = 'Null';" node_modules/@polkadot/types/metadata/v13/toLatest.js
+	}
 	# End of Patching #
 }
 
@@ -59,13 +60,10 @@ start_app(){
 	PROCNAME="$(pwd|rev| cut -d '/' -f1-2|rev| sed 's/\//-/g')"
 	SID="$("${PM2}" id "${PROCNAME}"| sed -e 's| ||g' -e 's|\[||g' -e 's|\]||g')"
 	[[ -z "${SID}" ]] && "${PM2}" start yarn --name ${PROCNAME} -- start  || "${PM2}" restart "${SID}"
-	sleep 1
 	"${PM2}" save
 }
 
 ## Mains ##
-
-check_pkgs
 cleanup
 setup_app
 patching

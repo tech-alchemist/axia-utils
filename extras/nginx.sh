@@ -1,6 +1,7 @@
 #!/bin/bash
-# Author : Tech-Alchemist (Abhishek Rana)
-# Description : Script to Configure NGINX Vhost WSS or HTTPS 
+## Author : Tech-Alchemist (Abhishek Rana)
+## Description : Script to Configure NGINX Vhost WSS or HTTPS 
+## Usage : ./this_script <DOMAIN_NAME> <PRIVATE_IP> <PRIVATE_PORT>
 
 DOMAIN_NAME="$1"
 PRIVATE_IP="$2"
