@@ -12,17 +12,17 @@ LOGFILE="${SPACE}/Data/daemon.log"
 HELPMSG="[-] Usage : $0 < testnet | canarynet | mainnet >"
 NETWORK="$1" ; [[ -z ${NETWORK} ]] && { echo "${HELPMSG}" ; exit 1 ; }
 
-## Unqiue Node Name 
+## Unqiue Node Name for Telemetry ##
 NODENAME="${NETWORK^} Node $(ifconfig | grep "^e\|^w" -A 4| grep ether| awk '{print $2}' | sed 's|:| |g' | rev | head -1)"
 
-## Check File Sanity & Bring If file is 
+## Check File Sanity & Bring If file is not correct ##
 file_sanity(){
   FILE_PATH="$1"
   FILE_NAME="$2"
   FILE_URL="$3"
   CHECKSUM_FILE="/opt/opsdude/axia-utils/extras/checksum.txt"
   MENTIONED_HASH=$(grep -i " ${FILE_NAME}" ${CHECKSUM_FILE}|sed 's/ */ /g'|awk '{print $1}'| head -1)
-  EXISTING_HASH=$(md5sum ${FILE_PATH}|awk '{print $1}')
+  EXISTING_HASH=$(md5sum ${FILE_PATH}|awk '{print $1}' 2>/dev/null)
   [[ "${MENTIONED_HASH}" != "${EXISTING_HASH}" ]] && { 
     rm -f ${FILE_PATH}
     sudo mkdir -p ${SPACE}/Bins ${DATADIR} ; sudo chown -R $(whoami).$(whoami) ${SPACE}
@@ -50,20 +50,20 @@ start_network(){
 case $NETWORK in
 
   MainNet | MAINNET | mainnet)
-    file_sanity "${SPACE}/Bins/axia" "axia" "https://releases.axiacoin.network/TestNet/axia"
-    file_sanity "${SPACE}/Data/NodeData/testnet.raw.json" "testnet.raw.json" "https://releases.axiacoin.network/TestNet/testnet.raw.json"
+    file_sanity "${SPACE}/Bins/axia"                "axia"                "https://releases.axiacoin.network/TestNet/axia"
+    file_sanity "${SPACE}/Data/testnet.raw.json"    "testnet.raw.json"    "https://releases.axiacoin.network/TestNet/testnet.raw.json"
     start_network testnet
     ;;
 
   CanaryNet | CANARYNET | canarynet)
-    file_sanity "${SPACE}/Bins/axia" "axia" "releases.axiacoin.network/TestNet/axia"
-    file_sanity "${SPACE}/Data/NodeData/canarynet.raw.json" "canarynet.raw.json" "https://releases.axiacoin.network/CanaryNet/canarynet.raw.json"
+    file_sanity "${SPACE}/Bins/axia"                "axia"                "releases.axiacoin.network/TestNet/axia"
+    file_sanity "${SPACE}/Data/canarynet.raw.json"  "canarynet.raw.json"  "https://releases.axiacoin.network/CanaryNet/canarynet.raw.json"
     start_network canarynet
     ;;
 
   TestNet | TESTNET | testnet)
-    file_sanity "${SPACE}/Bins/axia" "axia" "https://releases.axiacoin.network/TestNet/axia"
-    file_sanity "${SPACE}/Data/NodeData/testnet.raw.json" "testnet.raw.json" "https://releases.axiacoin.network/TestNet/testnet.raw.json"
+    file_sanity "${SPACE}/Bins/axia"                "axia"                "https://releases.axiacoin.network/TestNet/axia"
+    file_sanity "${SPACE}/Data/testnet.raw.json"    "testnet.raw.json"    "https://releases.axiacoin.network/TestNet/testnet.raw.json"
     start_network testnet
     ;;
 
