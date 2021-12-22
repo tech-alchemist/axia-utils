@@ -40,7 +40,7 @@ file_sanity(){
 ## Start Network Accordingly
 start_network(){
     NETNAME="$1"
-    for i in $(ps aux | grep ${BINARY}| grep "NodeData" | awk '{print $2}'); do kill -9 $i && echo "[+] Killed Existing PID ${PID} "; done && sleep 3
+    for i in $(ps aux | grep ${BINARY}| grep "NodeData" | awk '{print $2}'); do kill -9 $i && echo "[+] Killed Existing PID ${i}"; done && sleep 3
     mkdir -p ${DATADIR}
     [[ -f "${SPACE}/Data/${NETNAME}.raw.json" ]] && CHAINNAME="${SPACE}/Data/${NETNAME}.raw.json" || { echo "[-] Invalid ChainSpec" ; exit 1 ; }
     ${BINARY} -d ${DATADIR} --ws-port ${WSS} --rpc-port ${RPC} --port ${P2P} --chain ${SPACE}/Data/${NETNAME}.raw.json --rpc-cors all --unsafe-rpc-external --unsafe-ws-external --name "${NODENAME}" &> "${LOGFILE}" &
