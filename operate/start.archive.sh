@@ -36,7 +36,7 @@ start_network(){
     NETNAME="$1"
     for i in $(ps aux | grep ${BINARY}| grep "NodeData" | awk '{print $2}'); do kill -9 $i; done && sleep 3
     mkdir -p ${DATADIR}
-    [[ -f "${SPACE}/Data/${NETNAME}.raw.json" ]] && CHAINNAME="${SPACE}/Data/${NETNAME}.raw.json" || { echo "[-] ChainSpec " ; exit 1 ; }
+    [[ -f "${SPACE}/Data/${NETNAME}.raw.json" ]] && CHAINNAME="${SPACE}/Data/${NETNAME}.raw.json" || { echo "[-] Invalid ChainSpec" ; exit 1 ; }
     ${BINARY} -d ${DATADIR} --ws-port ${WSS} --rpc-port ${RPC} --port ${P2P} --chain ${SPACE}/Data/${NETNAME}.raw.json --rpc-cors all --unsafe-rpc-external --unsafe-ws-external --name "${NODENAME}" --pruning archive --wasm-execution Compiled &> "${LOGFILE}" &
     echo "[+] Node started with :"
     echo "    Ports    : P2P = ${P2P} , WSS = ${WSS} , RPC = ${RPC}"
@@ -58,13 +58,13 @@ case $NETWORK in
   CanaryNet | CANARYNET | canarynet)
     file_sanity "${SPACE}/Bins/axia"                    "axia"                    "releases.axiacoin.network/testnet/axia"
     file_sanity "${SPACE}/Data/${NETWORK,,}.raw.json"   "${NETWORK,,}.raw.json"   "releases.axiacoin.network/${NETWORK,,}/${NETWORK,,}.raw.json"
-    start_network ${NETWORK^^}
+    start_network ${NETWORK,,}
     ;;
 
   TestNet | TESTNET | testnet)
     file_sanity "${SPACE}/Bins/axia"                    "axia"                    "https://releases.axiacoin.network/${NETWORK,,}/axia"
     file_sanity "${SPACE}/Data/${NETWORK,,}.raw.json"   "${NETWORK,,}.raw.json"   "https://releases.axiacoin.network/${NETWORK,,}/${NETWORK,,}.raw.json"
-    start_network ${NETWORK^^}
+    start_network ${NETWORK,,}
     ;;
 
   *)
