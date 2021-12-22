@@ -26,7 +26,7 @@ file_sanity(){
   [[ "${MENTIONED_HASH}" != "${EXISTING_HASH}" ]] && { 
     rm -f ${FILE_PATH}
     sudo mkdir -p ${SPACE}/Bins ${DATADIR} ; sudo chown -R $(whoami).$(whoami) ${SPACE}
-    wget -c ${FILE_URL} -q --show-progress -O ${FILE_PATH} || { echo "[-] Unable to download ${FILE_PATH} from ${FILE_URL}" ; exit 1 ; }
+    wget -c "${FILE_URL}" -q --show-progress -O ${FILE_PATH} || { echo "[-] Unable to download ${FILE_PATH} from ${FILE_URL}" ; exit 1 ; }
   } || echo "[+] File [${FILE_NAME}] has valid hash [${EXISTING_HASH}] , Skipping downlaod.."
 }
 
@@ -49,7 +49,7 @@ start_network(){
 case $NETWORK in
 
   MainNet | MAINNET | mainnet)
-    file_sanity "${SPACE}/Bins/axia" "axia" 
+    file_sanity "${SPACE}/Bins/axia" "axia" "https://releases.axiacoin.network/TestNet/axia"
     file_sanity "${SPACE}/Data/NodeData/testnet.raw.json" "testnet.raw.json" "https://releases.axiacoin.network/TestNet/testnet.raw.json"
     start_network testnet
     ;;
@@ -61,7 +61,7 @@ case $NETWORK in
     ;;
 
   TestNet | TESTNET | testnet)
-    file_sanity "${SPACE}/Bins/axia" "axia" 
+    file_sanity "${SPACE}/Bins/axia" "axia" "https://releases.axiacoin.network/TestNet/axia"
     file_sanity "${SPACE}/Data/NodeData/testnet.raw.json" "testnet.raw.json" "https://releases.axiacoin.network/TestNet/testnet.raw.json"
     start_network testnet
     ;;
