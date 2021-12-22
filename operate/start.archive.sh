@@ -26,6 +26,7 @@ file_sanity(){
   [[ "${MENTIONED_HASH}" != "${EXISTING_HASH}" ]] && { 
     rm -f ${FILE_PATH}
     sudo mkdir -p ${SPACE}/Bins ${DATADIR} ; sudo chown -R $(whoami).$(whoami) ${SPACE}
+    echo "[-] File [${FILE_NAME}] has invalid hash [${EXISTING_HASH}] , Downloading.."
     wget -c "${FILE_URL}" -q --show-progress -O ${FILE_PATH} || { echo "[-] Unable to download ${FILE_PATH} from ${FILE_URL}" ; exit 1 ; }
     chmod +x ${FILE_PATH}
   } || echo "[+] File [${FILE_NAME}] has valid hash [${EXISTING_HASH}] , Skipping downlaod.."
