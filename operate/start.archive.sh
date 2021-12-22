@@ -21,8 +21,8 @@ file_sanity(){
   FILE_NAME="$2"
   FILE_URL="$3"
   CHECKSUM_FILE="/opt/opsdude/axia-utils/extras/checksum.txt"
-  MENTIONED_HASH=$(grep -i " ${FILE_NAME}" ${CHECKSUM_FILE}|sed 's/ */ /g'|awk '{print $1}'| head -1)
-  EXISTING_HASH=$(md5sum ${FILE_PATH} | awk '{print $1}')
+  MENTIONED_HASH="$(grep -i " ${FILE_NAME}" ${CHECKSUM_FILE}|sed 's/ */ /g'|awk '{print $1}'| head -1)"
+  EXISTING_HASH="$(md5sum ${FILE_PATH} | awk '{print $1}')"
   [[ "${MENTIONED_HASH}" != "${EXISTING_HASH}" ]] && { 
     rm -f ${FILE_PATH}
     sudo mkdir -p ${SPACE}/Bins ${DATADIR} ; sudo chown -R $(whoami).$(whoami) ${SPACE}
