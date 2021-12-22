@@ -3,7 +3,6 @@
 # Description : Script to configure AXIA Full Node
 
 SPACE="/home/AXIA"
-APPNAME="Bins"
 RELEASE_URL="https://releases.axiacoin.network/TestNet/axia"
 
 install_rust(){
@@ -22,8 +21,8 @@ rm -f /tmp/rustup.*
 }
 
 get_binary(){
-[[ -d "${SPACE}/${APPNAME}" ]] || { sudo mkdir -p ${SPACE}/${APPNAME} ; sudo chown -R $(whoami).$(whoami) ${SPACE} ; }
-cd ${SPACE}/${APPNAME}
+[[ -d "${SPACE}/Bins" ]] || { sudo mkdir -p ${SPACE}/Bins ; sudo chown -R $(whoami).$(whoami) ${SPACE} ; }
+cd ${SPACE}/Bins
 wget -c ${RELEASE_URL} ; chmod +x axia
 }
 
