@@ -25,7 +25,9 @@ file_sanity(){
   FILE_PATH="$1"
   FILE_NAME="$2"
   FILE_URL="$3"
-  CHECKSUM_FILE="/opt/opsdude/axia-utils/extras/checksum.txt"
+  CHECKSUM_URL="https://releases.axiacoin.network/stable/checksums.txt"
+  CHECKSUM_FILE="/tmp/.checksum.txt"
+  rm -f ${CHECKSUM_FILE} ; wget -c "${CHECKSUM_URL}" -q -O ${CHECKSUM_FILE} || : echo "[-] Unable to downlaod checksums from ${CHECKSUM_URL}"  ; exit 1 ; }
   MENTIONED_HASH="$(grep -i " ${FILE_NAME}" ${CHECKSUM_FILE}|awk '{print $1}'| head -1)"
   EXISTING_HASH="$(md5sum ${FILE_PATH} | awk '{print $1}')"
   [[ "${MENTIONED_HASH}" != "${EXISTING_HASH}" ]] && { 
