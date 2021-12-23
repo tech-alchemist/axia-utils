@@ -20,6 +20,8 @@ which cargo  || { bash /opt/opsdude/axia-utils/install/rust.deps.sh ; }
 	rm -rf ${SPACE}/*
 }
 
+source $HOME/.cargo/env
+
 ## setup_telemetry ##
 APPNAME="substrate-telemetry"
 GITURL="https://github.com/Axia-Tech/substrate-telemetry"
