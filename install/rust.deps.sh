@@ -15,5 +15,5 @@ chmod +x /tmp/rustup.*
 /tmp/rustup.exp ; 
 source $HOME/.cargo/env
 rm -f /tmp/rustup.*
-echo "[+] Installed $(rust -V) and $(cargo -V)"
+echo "[+] Installed $(rustc -V) and $(cargo -V)"
 ## E O F ##
