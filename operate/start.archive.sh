@@ -58,20 +58,20 @@ start_network(){
 case $NETWORK in
 
   MainNet | MAINNET | mainnet)
-    file_sanity "${SPACE}/Bins/axia"                    "axia"                    "releases.axiacoin.network/testnet/axia"
-    file_sanity "${SPACE}/Data/${NETWORK,,}.raw.json"   "${NETWORK,,}.raw.json"   "releases.axiacoin.network/testnet/testnet.raw.json"
+    file_sanity "${SPACE}/Bins/axia"                    "axia"                    "releases.axiacoin.network/stable/axia"
+    file_sanity "${SPACE}/Data/${NETWORK,,}.raw.json"   "${NETWORK,,}.raw.json"   "releases.axiacoin.network/stable/testnet.raw.json"
     start_network ${NETWORK,,}
     ;;
 
   CanaryNet | CANARYNET | canarynet)
-    file_sanity "${SPACE}/Bins/axia"                    "axia"                    "releases.axiacoin.network/testnet/axia"
-    file_sanity "${SPACE}/Data/${NETWORK,,}.raw.json"   "${NETWORK,,}.raw.json"   "releases.axiacoin.network/${NETWORK,,}/${NETWORK,,}.raw.json"
+    file_sanity "${SPACE}/Bins/axia"                    "axia"                    "releases.axiacoin.network/stable/axia"
+    file_sanity "${SPACE}/Data/${NETWORK,,}.raw.json"   "${NETWORK,,}.raw.json"   "releases.axiacoin.network/stable/${NETWORK,,}.raw.json"
     start_network ${NETWORK,,}
     ;;
 
   TestNet | TESTNET | testnet)
-    file_sanity "${SPACE}/Bins/axia"                    "axia"                    "https://releases.axiacoin.network/${NETWORK,,}/axia"
-    file_sanity "${SPACE}/Data/${NETWORK,,}.raw.json"   "${NETWORK,,}.raw.json"   "https://releases.axiacoin.network/${NETWORK,,}/${NETWORK,,}.raw.json"
+    file_sanity "${SPACE}/Bins/axia"                    "axia"                    "https://releases.axiacoin.network/stable/axia"
+    file_sanity "${SPACE}/Data/${NETWORK,,}.raw.json"   "${NETWORK,,}.raw.json"   "https://releases.axiacoin.network/stable/${NETWORK,,}.raw.json"
     start_network ${NETWORK,,}
     ;;
 
