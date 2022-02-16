@@ -37,6 +37,7 @@ setup_app(){
 }
 
 patching(){
+	sleep 2
 	# Color Change in https://wiki.axiacoin.network/docs/build-pdk
 	cd ${SPACE}/${APPNAME}
 	sed -i 's|#d73a49|#136197|g' node_modules/prism-react-renderer/themes/github/index.cjs.js
