@@ -37,9 +37,10 @@ setup_app(){
 }
 
 patching(){
-	# Well You know Dev Team is working on many things. Therefore, Code stability is ideal & According to them. We need to automate the manual patching work as well.
+	# Color Change in https://wiki.axiacoin.network/docs/build-pdk
 	cd ${SPACE}/${APPNAME}
-
+	sed -i 's|#d73a49|#136197|g' node_modules/prism-react-renderer/themes/github/index.cjs.js
+	sed -i 's|#e3116c|#303030|g' node_modules/prism-react-renderer/themes/github/index.cjs.js
 	# End of Patching #
 }
 
