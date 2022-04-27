@@ -52,7 +52,8 @@ start_network(){
     sleep 10
     BOOTID="$(grep -i "Local node identity is:" ${SPACE}/Data/daemon.log | tail -n 1 | cut -d ':' -f4 | sed 's/ //g')"
     PRIVIP="$(ifconfig | grep "^e" -A1| tail -n 1 |awk '{print $2}')"
-    echo "    BOOTNODE : /ip4/${PRIVIP}/tcp/${P2P}/p2p/${BOOTID}"
+    echo "    NODE ID : ${BOOTID}"
+    echo "    BOOTNODE: /ip4/${PRIVIP}/tcp/${P2P}/p2p/${BOOTID}"
 }
 
 case $NETWORK in
