@@ -59,7 +59,7 @@ case $NETWORK in
 
   MainNet | MAINNET | mainnet)
     file_sanity "${SPACE}/Bins/axia"                    "axia"                    "releases.axiacoin.network/stable/axia"
-    file_sanity "${SPACE}/Data/${NETWORK,,}.raw.json"   "${NETWORK,,}.raw.json"   "releases.axiacoin.network/stable/testnet.raw.json"
+    file_sanity "${SPACE}/Data/${NETWORK,,}.raw.json"   "${NETWORK,,}.raw.json"   "releases.axiacoin.network/stable/${NETWORK,,}.raw.json"
     start_network ${NETWORK,,}
     ;;
 
