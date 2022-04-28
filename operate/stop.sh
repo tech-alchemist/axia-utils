@@ -11,6 +11,7 @@ killer(){
     done
 }
 
-killer axia Bins    # Stopping Node
+killer axia chain
+killer axia Bins
 
 ## E O F ##
