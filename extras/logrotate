@@ -1,0 +1,11 @@
+# Axia Node Log Logrotate #
+
+/home/AXIA/Data/debug.log {
+  rotate 30
+  size 100M
+  weekly
+  compress
+  missingok
+  notifempty
+}
+

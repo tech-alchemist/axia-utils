@@ -16,4 +16,6 @@ chmod +x /tmp/rustup.*
 source $HOME/.cargo/env
 rm -f /tmp/rustup.*
 echo "[+] Installed $(rustc -V) and $(cargo -V)"
+sudo cp /opt/opsdude/axia-utils/extras/logrotate /etc/logrotate.d/axia 
+echo "[+] Configured LogRotate"
 ## E O F ##
